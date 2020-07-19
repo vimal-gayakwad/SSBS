@@ -18,8 +18,8 @@
     <fragment
         android:id="@+id/nav_status"
         android:name="com.example.ssbs.ui.status.StatusFragment"
-        android:label="@string/menu_appointments"
-        tools:layout="@layout/fragment_appointments" />
+        android:label="Status"
+        tools:layout="@layout/fragment_status" />
     <fragment
         android:id="@+id/nav_patients_history"
         android:name="com.example.ssbs.ui.patients_history.PatientsHistoryFragment"
