@@ -7,27 +7,27 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.ssbs.ui.home.HomeFragment"
+        android:name="com.example.ssbs.DoctorUI.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/nav_appointments"
-        android:name="com.example.ssbs.ui.appointments.AppointmentsFragment"
+        android:name="com.example.ssbs.DoctorUI.appointments.AppointmentsFragment"
         android:label="@string/menu_appointments"
         tools:layout="@layout/fragment_appointments" />
     <fragment
         android:id="@+id/nav_status"
-        android:name="com.example.ssbs.ui.status.StatusFragment"
+        android:name="com.example.ssbs.DoctorUI.status.StatusFragment"
         android:label="Status"
         tools:layout="@layout/fragment_status" />
     <fragment
         android:id="@+id/nav_patients_history"
-        android:name="com.example.ssbs.ui.patients_history.PatientsHistoryFragment"
+        android:name="com.example.ssbs.DoctorUI.patients_history.PatientsHistoryFragment"
         android:label="Patients History"
         tools:layout="@layout/fragment_patients_history" />
     <fragment
         android:id="@+id/nav_logout"
-        android:name="com.example.ssbs.ui.logout.LogoutFragment"
+        android:name="com.example.ssbs.DoctorUI.logout.LogoutFragment"
         android:label="Logout"
         tools:layout="@layout/fragment_logout" />
 

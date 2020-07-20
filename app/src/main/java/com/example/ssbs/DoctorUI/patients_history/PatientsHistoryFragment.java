@@ -1,4 +1,4 @@
-package com.example.ssbs.ui.appointments;
+package com.example.ssbs.DoctorUI.patients_history;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,14 +11,14 @@ import androidx.fragment.app.Fragment;
 
 import com.example.ssbs.R;
 
-public class AppointmentsFragment extends Fragment {
+public class PatientsHistoryFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_appointments, container, false);
+        View root = inflater.inflate(R.layout.fragment_patients_history, container, false);
         final TextView textView = root.findViewById(R.id.text_appointments);
 
-        textView.setText("hello");
+        textView.setText("PatientsHistory");
         return root;
     }
 }

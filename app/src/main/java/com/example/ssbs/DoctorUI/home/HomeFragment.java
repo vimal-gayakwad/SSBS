@@ -1,4 +1,4 @@
-package com.example.ssbs.ui.status;
+package com.example.ssbs.DoctorUI.home;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,14 +10,14 @@ import androidx.fragment.app.Fragment;
 
 import com.example.ssbs.R;
 
-public class StatusFragment extends Fragment {
+public class HomeFragment extends Fragment {
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_status, container, false);
-//        final TextView textView = root.findViewById(R.id.text_appointments);
+        View root = inflater.inflate(R.layout.fragment_home, container, false);
+       // final TextView textView = root.findViewById(R.id.text_home);
 
-        //      textView.setText("Status");
         return root;
     }
 }

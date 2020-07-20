@@ -1,4 +1,4 @@
-package com.example.ssbs;
+package com.example.ssbs.doctor;
 
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -17,6 +17,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.ssbs.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;

@@ -13,13 +13,11 @@
         <activity android:name=".login.SignUpActivity" />
         <activity android:name=".therapist.TherapistHomeActivity" />
         <activity android:name=".patient.PatientHomeActivity" />
-        <activity android:name=".doctor.DoctorHomeActivity" />
-        <activity android:name=".login.SignInActivity"></activity>
-
         <activity
-            android:name=".DoctorHomeNav"
+            android:name=".doctor.DoctorHomeNav"
             android:label="@string/title_activity_doctor_home_nav"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".login.SignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

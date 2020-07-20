@@ -1,4 +1,4 @@
-package com.example.ssbs.ui.logout;
+package com.example.ssbs.DoctorUI.logout;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
