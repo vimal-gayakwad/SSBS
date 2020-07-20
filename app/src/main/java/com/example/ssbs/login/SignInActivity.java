@@ -15,13 +15,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ssbs.R;
 import com.example.ssbs.doctor.DoctorHomeNav;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class SignInActivity extends AppCompatActivity {
 
@@ -37,28 +35,6 @@ public class SignInActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnSignIn);
         edUserID = findViewById(R.id.edUserID);
         edPassword = findViewById(R.id.edPassword);
-        Map<String, Object> user = new HashMap<>();
-        user.put("first", "Ada");
-        user.put("last", "Lovelace");
-        user.put("born", 1815);
-
-// Add a new document with a generated ID
-        db.collection("users")
-                .add(user)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-
-                        Toast.makeText(SignInActivity.this, "Added Successfully", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(SignInActivity.this, "Failed", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
     }
 
 
@@ -77,14 +53,53 @@ public class SignInActivity extends AppCompatActivity {
                 edUserID.setFocusedByDefault(true);
             }
         } else {
-            intent = new Intent(getApplicationContext(), DoctorHomeNav.class);
-            //startActivity(intent);
-        }
 
+
+            db.collection("Users")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+
+                                String username = edUserID.getText().toString(),
+                                        password = edPassword.getText().toString();
+                                String DBusername, DBPassword, usertype;
+
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    // Toast.makeText(SignInActivity.this, ""+document.getData(), Toast.LENGTH_LONG).show();
+                                    if (document.getString("username").equals(username) && document.getString("password").equals(password)) {
+                                        usertype = document.getString("utype");
+
+                                        if (usertype.equals("doctor")) {
+                                            intent = new Intent(getApplicationContext(), DoctorHomeNav.class);
+                                            startActivity(intent);
+                                        } else if (usertype.equals("therapist")) {
+                                            //TODO ADD THERAPIST ACTIVITY
+                                            Toast.makeText(SignInActivity.this, "Redirect To Therapist", Toast.LENGTH_SHORT).show();
+                                        } else if (usertype.equals("patient")) {
+                                            //TODO ADD PATIENT ACTIVITY
+                                            Toast.makeText(SignInActivity.this, "Redirect To Patient ", Toast.LENGTH_SHORT).show();
+                                        }
+
+                                    } else {
+
+                                    }
+                                }
+                            } else {
+                                Toast.makeText(SignInActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                            }
+
+
+                        }
+
+                    });
+        }
     }
 
     public void signUp(View view) {
         intent = new Intent(getApplicationContext(), SignUpActivity.class);
         startActivity(intent);
     }
+
 }
