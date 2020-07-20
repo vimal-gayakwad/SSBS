@@ -81,7 +81,6 @@ public class SignInActivity extends AppCompatActivity {
                                             //TODO ADD PATIENT ACTIVITY
                                             Toast.makeText(SignInActivity.this, "Redirect To Patient ", Toast.LENGTH_SHORT).show();
                                         }
-
                                     } else {
 
                                     }
