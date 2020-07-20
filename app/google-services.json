@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "779516921536",
+    "firebase_url": "https://ssbath-c2194.firebaseio.com",
+    "project_id": "ssbath-c2194",
+    "storage_bucket": "ssbath-c2194.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:779516921536:android:93692ab9aeab2297ae0f25",
+        "android_client_info": {
+          "package_name": "com.example.ssbs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "779516921536-3efv8o4p9nkvb84lqqhcj84lr9k5n9qr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCns6x0ugHz7ixSTiX2biqL4R0VkNlH7m0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "779516921536-3efv8o4p9nkvb84lqqhcj84lr9k5n9qr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
