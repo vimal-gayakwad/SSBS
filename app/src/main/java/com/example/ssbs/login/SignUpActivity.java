@@ -14,9 +14,7 @@ import com.example.ssbs.R;
 import static java.lang.Integer.valueOf;
 
 /*
- *
- * Creaeted By Vimal
- *
+ * Created by Vimal
  * */
 public class SignUpActivity extends AppCompatActivity {
     //declaration for variable
