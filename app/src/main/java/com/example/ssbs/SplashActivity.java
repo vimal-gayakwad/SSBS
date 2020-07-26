@@ -12,10 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ssbs.login.SignInActivity;
 
-/*
- *
+/*s
  * Created By Vimal
- *
  * */
 public class SplashActivity extends AppCompatActivity {
     private static int SPLASH_SCREEN_TIME_OUT = 2000;
