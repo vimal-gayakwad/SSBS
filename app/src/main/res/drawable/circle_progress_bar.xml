@@ -8,11 +8,9 @@
         android:useLevel="true">
         <gradient
             android:angle="0"
-            android:endColor="#d50000"
-            android:startColor="#cd5e55"
+            android:endColor="#03A9F4"
+            android:startColor="#08FD3D"
             android:type="sweep"
             android:useLevel="false" />
-
     </shape>
-
 </rotate>

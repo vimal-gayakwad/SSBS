@@ -5,17 +5,27 @@
     android:orientation="vertical"
     android:padding="20dp">
 
-    <TextView
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="Steam"
+        android:textSize="20sp" />
 
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Time" />
+        android:text="Time :"
+        android:textSize="30sp" />
 
     <TextView
-        android:id="@+id/texttime"
+        android:id="@+id/texttimer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="--:--" />
+        android:text="--:--"
+        android:textSize="50sp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,7 +40,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="Temperature" />
+                android:text="Temperature"
+                android:textSize="25sp" />
         </FrameLayout>
 
         <FrameLayout
@@ -55,6 +66,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text=""
+                android:textSize="25sp"
                 android:textStyle="bold"></TextView>
         </FrameLayout>
     </LinearLayout>
@@ -72,7 +84,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="Humidity" />
+                android:text="Humidity"
+                android:textSize="25sp" />
         </FrameLayout>
 
         <FrameLayout
@@ -93,6 +106,7 @@
 
             <TextView
                 android:id="@+id/text_humidity"
+                android:textSize="25sp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"

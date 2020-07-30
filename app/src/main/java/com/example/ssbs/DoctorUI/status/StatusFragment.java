@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.NumberPicker;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -20,36 +21,104 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class StatusFragment extends Fragment {
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("Temp");
-    private ProgressBar mProgressBarTemp;
-    private TextView textTemp;
+    //<---------------------instance declaration--------------------->//
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();//firebase  Database Reference
+    private DatabaseReference firbaseTempRef = database.getReference("Temp");//Realtime database Temperature Reference
+    private DatabaseReference firbaseHumidityRef = database.getReference("Humidity");//Realtime database Humidity  Reference
+    private DatabaseReference firebaseTimerRef = database.getReference("Timer");
+    private ProgressBar mProgressBarTemp;//Progressvar for temperature
+    private TextView textTemp;//text for temperature
+    private TextView textHumidity;//text for Humidity
+    private ProgressBar mProgressBarHumidity;
+    private NumberPicker numberPicker_minute, numberPicker_second;//number pickers for time set in minutes and seconds
+    private TextView texttimer;//text for display timer value
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_status, container, false);
+
+
+        LayoutInflater Linflater = getActivity().getLayoutInflater();
+
+        View v = inflater.inflate(
+                R.layout.fragment_status, null);
+
+        //<---------------------initialization--------------------->//
         mProgressBarTemp = root.findViewById(R.id.progress_temp);
+        mProgressBarHumidity = root.findViewById(R.id.progress_humidity);
+        textHumidity = root.findViewById(R.id.text_humidity);
         textTemp = root.findViewById(R.id.text_temp);
-        myRef.setValue("1");
+        texttimer = root.findViewById(R.id.texttimer);
+        //numberPicker_minute = (NumberPicker) root.findViewById(R.id.dialog_number_picker_m);
+        //numberPicker_second = (NumberPicker) root.findViewById(R.id.dialog_number_picker_s);
+
+
+        //<---------------------set properties for progressbar--------------------->//
         mProgressBarTemp.setMax(100);
         mProgressBarTemp.setMin(0);
-        myRef.addValueEventListener(new ValueEventListener() {
+
+        //<---------------------set properties for numberpickers--------------------->//
+        //numberPicker_minute.setMinValue(0);// restricted number to minimum value i.e 1
+        //numberPicker_minute.setMaxValue(60);// restricked number to maximum value i.e. 31
+        //numberPicker_minute.setWrapSelectorWheel(true);
+
+        //numberPicker_second.setMinValue(0);// restricted number to minimum value i.e 1
+        //numberPicker_second.setMaxValue(60);// restricked number to maximum value i.e. 31
+        //numberPicker_second.setWrapSelectorWheel(true);
+
+//        numberPicker_minute.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+//            @Override
+//            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+//                Toast.makeText(getContext(), "value changed" + newVal, Toast.LENGTH_SHORT).show();
+//            }
+//        });
+        mProgressBarHumidity.setProgress((int) Float.parseFloat("100"));
+        mProgressBarTemp.setProgress((int) Float.parseFloat("70"));
+        textTemp.setText("20" + "  °C");
+        textHumidity.setText("20" + "  °C");
+        firbaseTempRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                mProgressBarTemp.setProgress((int) Float.parseFloat(value));
-                textTemp.setText(value + "°C");
+                String Tempvalue = dataSnapshot.getValue(String.class);
+                mProgressBarTemp.setProgress((int) Float.parseFloat(Tempvalue));
+                textTemp.setText(Tempvalue + "  °C");
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
-                // Failed to read value
+
+            }
+
+        });
+        firbaseHumidityRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String Humidityvalue = snapshot.getValue(String.class);
+                mProgressBarHumidity.setProgress((int) Float.parseFloat(Humidityvalue));
+                textHumidity.setText(Humidityvalue + "  g.m3");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
+        firebaseTimerRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String TimerValue = snapshot.getValue(String.class);
+                texttimer.setText(TimerValue);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         return root;
     }
 }

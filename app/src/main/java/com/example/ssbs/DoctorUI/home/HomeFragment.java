@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -32,21 +31,21 @@ public class HomeFragment extends Fragment {
         // final TextView textView = root.findViewById(R.id.text_home);
 
 
-        mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (flag == false) {
-                    flag = true;
-                    setStatus(flag);
-                    myRef.setValue("1");
-                } else {
-                    flag = false;
-                    setStatus(flag);
-                    myRef.setValue("0");
-                }
-                //Toast.makeText(getContext(), "" + flag, Toast.LENGTH_SHORT).show();
-            }
-        });
+//        mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if (flag == false) {
+//                    flag = true;
+//                    setStatus(flag);
+//                    myRef.setValue("1");
+//                } else {
+//                    flag = false;
+//                    setStatus(flag);
+//                    myRef.setValue("0");
+//                }
+//                //Toast.makeText(getContext(), "" + flag, Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
 
         return root;
