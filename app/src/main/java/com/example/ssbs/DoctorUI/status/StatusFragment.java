@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.NumberPicker;
 import android.widget.ProgressBar;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,15 +25,17 @@ import com.google.firebase.database.ValueEventListener;
 public class StatusFragment extends Fragment {
     //<---------------------instance declaration--------------------->//
     private FirebaseDatabase database = FirebaseDatabase.getInstance();//firebase  Database Reference
-    private DatabaseReference firbaseTempRef = database.getReference("Temp");//Realtime database Temperature Reference
+    private DatabaseReference firbaseTempRef = database.getReference("temp");//Realtime database Temperature Reference
     private DatabaseReference firbaseHumidityRef = database.getReference("Humidity");//Realtime database Humidity  Reference
     private DatabaseReference firebaseTimerRef = database.getReference("Timer");
+    private DatabaseReference firebaseStatus = database.getReference("LED_STATUS");
     private ProgressBar mProgressBarTemp;//Progressvar for temperature
     private TextView textTemp;//text for temperature
     private TextView textHumidity;//text for Humidity
     private ProgressBar mProgressBarHumidity;
     private NumberPicker numberPicker_minute, numberPicker_second;//number pickers for time set in minutes and seconds
     private TextView texttimer;//text for display timer value
+    private Switch aSwitch;//to turn steambath on and off
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -50,6 +54,7 @@ public class StatusFragment extends Fragment {
         textHumidity = root.findViewById(R.id.text_humidity);
         textTemp = root.findViewById(R.id.text_temp);
         texttimer = root.findViewById(R.id.texttimer);
+        aSwitch = root.findViewById(R.id.switch1);
         //numberPicker_minute = (NumberPicker) root.findViewById(R.id.dialog_number_picker_m);
         //numberPicker_second = (NumberPicker) root.findViewById(R.id.dialog_number_picker_s);
 
@@ -73,17 +78,15 @@ public class StatusFragment extends Fragment {
 //                Toast.makeText(getContext(), "value changed" + newVal, Toast.LENGTH_SHORT).show();
 //            }
 //        });
-        mProgressBarHumidity.setProgress((int) Float.parseFloat("100"));
-        mProgressBarTemp.setProgress((int) Float.parseFloat("70"));
-        textTemp.setText("20" + "  °C");
-        textHumidity.setText("20" + "  °C");
+
+
         firbaseTempRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                String Tempvalue = dataSnapshot.getValue(String.class);
-                mProgressBarTemp.setProgress((int) Float.parseFloat(Tempvalue));
+                long Tempvalue = dataSnapshot.getValue(long.class);
+                mProgressBarTemp.setProgress((int) (Tempvalue));
                 textTemp.setText(Tempvalue + "  °C");
             }
 
@@ -96,8 +99,8 @@ public class StatusFragment extends Fragment {
         firbaseHumidityRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String Humidityvalue = snapshot.getValue(String.class);
-                mProgressBarHumidity.setProgress((int) Float.parseFloat(Humidityvalue));
+                long Humidityvalue = snapshot.getValue(long.class);
+                mProgressBarHumidity.setProgress((int) Humidityvalue);
                 textHumidity.setText(Humidityvalue + "  g.m3");
             }
 
@@ -116,6 +119,17 @@ public class StatusFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+
+        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    firebaseStatus.setValue(1);
+                } else {
+                    firebaseStatus.setValue(0);
+                }
             }
         });
 
