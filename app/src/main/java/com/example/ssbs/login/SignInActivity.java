@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.ssbs.LoadingDialog;
 import com.example.ssbs.R;
 import com.example.ssbs.doctor.DoctorHomeNav;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,7 +27,8 @@ public class SignInActivity extends AppCompatActivity {
     private Button btnLogin;
     private EditText edUserID, edPassword;
     private Intent intent;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private LoadingDialog loadingDialog = new LoadingDialog(SignInActivity.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +57,7 @@ public class SignInActivity extends AppCompatActivity {
             }
         } else {
 
-
+            loadingDialog.startLoadingDialog();
             db.collection("Users")
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -73,6 +75,7 @@ public class SignInActivity extends AppCompatActivity {
                                         usertype = document.getString("utype");
 
                                         if (usertype.equals("doctor")) {
+                                            loadingDialog.dismissDialog();
                                             intent = new Intent(getApplicationContext(), DoctorHomeNav.class);
                                             startActivity(intent);
                                         } else if (usertype.equals("therapist")) {
